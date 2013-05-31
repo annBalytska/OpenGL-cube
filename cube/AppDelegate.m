@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  cube
-//
-//  Created by Anna Balytska on 5/28/13.
-//  Copyright (c) 2013 softserve. All rights reserved.
-//
-
 #import "AppDelegate.h"
 
 @interface AppDelegate()
@@ -31,7 +23,7 @@ GLfloat size = 0.8;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{   
+{
     EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:context];
     
@@ -57,7 +49,7 @@ GLfloat size = 0.8;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
@@ -83,11 +75,11 @@ GLfloat size = 0.8;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
-        } 
+        }
     }
 }
 
@@ -137,7 +129,7 @@ GLfloat size = 0.8;
         /*
          Replace this implementation with code to handle the error appropriately.
          
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
          
          Typical reasons for an error here include:
          * The persistent store is not accessible;
@@ -159,7 +151,7 @@ GLfloat size = 0.8;
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
-    }    
+    }
     
     return _persistentStoreCoordinator;
 }
@@ -189,7 +181,7 @@ GLfloat size = 0.8;
         GLKVector3Make(-0.5,  0.5, -0.5), // Left  top    back
     };
     
-
+    
     
     GLKVector3 triangleVertices[] = {
         // Front
@@ -213,20 +205,41 @@ GLfloat size = 0.8;
     };
     
     GLKVector3 normals[] = {
-        GLKVector3Make(0, 0, 1), 
+        GLKVector3Make(0, 0, 1),
         GLKVector3Make(1, 0, 0),
         GLKVector3Make(0, 0, -1),
         GLKVector3Make(-1, 0, 1),
         GLKVector3Make(0, 1, 0),
         GLKVector3Make(0, -1, 0),
     };
-
+    
+    
+    
+    GLKVector3 textures[] = {
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 0, 0), GLKVector3Make(1, 1, 0),
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 1, 0), GLKVector3Make(0, 1, 0),
+        
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 0, 0), GLKVector3Make(1, 1, 0),
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 1, 0), GLKVector3Make(0, 1, 0),
+        
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 0, 0), GLKVector3Make(1, 1, 0),
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 1, 0), GLKVector3Make(0, 1, 0),
+        
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 0, 0), GLKVector3Make(1, 1, 0),
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 1, 0), GLKVector3Make(0, 1, 0),
+        
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 0, 0), GLKVector3Make(1, 1, 0),
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 1, 0), GLKVector3Make(0, 1, 0),
+        
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 0, 0), GLKVector3Make(1, 1, 0),
+        GLKVector3Make(0, 0, 0), GLKVector3Make(1, 1, 0), GLKVector3Make(0, 1, 0)
+    };
     
     
     glClearColor(0.5, 0.5, 0.5, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     
- 
+    
     
     [_effect prepareToDraw];
     
@@ -238,10 +251,10 @@ GLfloat size = 0.8;
     glEnableVertexAttribArray(GLKVertexAttribNormal);
     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 0, normals);
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 3, GL_FLOAT, GL_FALSE,0, triangleVertices);
-
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 3, GL_FLOAT, GL_FALSE,0, textures);
+    
     glDrawArrays(GL_TRIANGLES, 0, 36);
-    glDisableVertexAttribArray(GLKVertexAttribPosition);    
+    glDisableVertexAttribArray(GLKVertexAttribPosition);
     glBindVertexArrayOES(0);
     
 }
