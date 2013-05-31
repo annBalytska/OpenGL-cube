@@ -210,7 +210,7 @@ GLfloat size = 0.8;
         GLKVector3Make(0, 0, -1),
         GLKVector3Make(-1, 0, 1),
         GLKVector3Make(0, 1, 0),
-        GLKVector3Make(0, -1, 0),
+        GLKVector3Make(0, -1, 0)
     };
     
     
@@ -236,7 +236,7 @@ GLfloat size = 0.8;
     };
     
     
-    glClearColor(0.5, 0.5, 0.5, 1.0);
+    glClearColor(0.5, 0.5, 0.5, 0.5);
     glClear(GL_COLOR_BUFFER_BIT);
     
     
@@ -244,7 +244,6 @@ GLfloat size = 0.8;
     [_effect prepareToDraw];
     
     glEnable(GL_DEPTH_TEST);
-    
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, triangleVertices);
@@ -265,16 +264,16 @@ GLfloat size = 0.8;
 {
     _effect = [[GLKBaseEffect alloc] init];
     
-    GLKMatrix4 yRotation = GLKMatrix4MakeYRotation(1.0/8.0*2/M_PI);
-    GLKMatrix4 xRotation = GLKMatrix4MakeXRotation(1.0/8.0*2/M_PI);
-    GLKMatrix4 translate = GLKMatrix4MakeTranslation(0, 0, -1.8);
+    GLKMatrix4 yRotation = GLKMatrix4MakeYRotation(10.0);
+    GLKMatrix4 xRotation = GLKMatrix4MakeXRotation(10.0);
+    GLKMatrix4 translate = GLKMatrix4MakeTranslation(0.05, 0, -2.0);
     
     self.effect.light0.enabled = GL_TRUE;
-    self.effect.light0.diffuseColor = GLKVector4Make(0.8f, 0.8f, 0.8f, 1.0f);
+    self.effect.light0.diffuseColor = GLKVector4Make(0.4f, 0.8f, 0.4f, 1.0f);
     self.effect.lightingType = GLKLightingTypePerVertex;
     
     _effect.transform.modelviewMatrix = GLKMatrix4Multiply(translate,GLKMatrix4Multiply(xRotation, yRotation));
-    _effect.transform.projectionMatrix = GLKMatrix4MakePerspective(20.0, 0.75, 0.1, 100.0);
+    _effect.transform.projectionMatrix = GLKMatrix4MakePerspective(45.0, 0.75, 0.1, 20.0);
     
     
     glActiveTexture(GL_TEXTURE0);
